@@ -1,10 +1,16 @@
 const express = require('express');
-const app = express();
+const expressApp = express();
+const bodyParser = require('body-parser');
+expressApp.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+const persistenceClient = require('./clients/persistence-client');
+
+expressApp.post('/', (req, res) => {
+  persistenceClient.addEvent(req.body)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(500).send('There was an error'));
 });
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+expressApp.listen(3000, () => {
+  console.log('Example expressApp listening on port 3000!');
 });
