@@ -1,0 +1,17 @@
+/.npm
+
+/npmrc
+/.npmrc
+
+.package.json
+package.tgz
+/*-*.tgz
+
+logs
+*.log
+
+pids
+*.pid
+*.seed
+
+node_modules
