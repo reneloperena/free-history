@@ -5,7 +5,13 @@ expressApp.use(bodyParser.json());
 
 const persistenceClient = require('./clients/persistence-client');
 
-expressApp.post('/', (req, res) => {
+expressApp.post('/events', (req, res) => {
+  persistenceClient.addEvent(req.body)
+    .then(doc => res.send(doc))
+    .catch(err => res.status(500).send('There was an error'));
+});
+
+expressApp.post('/events', (req, res) => {
   persistenceClient.addEvent(req.body)
     .then(doc => res.send(doc))
     .catch(err => res.status(500).send('There was an error'));
